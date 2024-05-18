@@ -1,0 +1,39 @@
+DROP DATABASE IF EXISTS bd_api_licencias;
+CREATE DATABASE bd_api_licencias CHARSET utf8mb4;
+USE bd_api_licencias;
+
+-- Tabla de conductores
+CREATE TABLE conductor (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    nombres VARCHAR(100) NOT NULL,
+    edad INT(11) NOT NULL,
+    direccion VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+-- Tabla de licencias
+CREATE TABLE licencia (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    conductor_id INT(11) NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
+    fecha_expedicion DATE NOT NULL,
+    fecha_expiracion DATE NOT NULL,
+    numero VARCHAR(20) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (conductor_id) REFERENCES conductor(id)
+);
+
+-- Inserción de datos en la tabla conductor
+INSERT INTO conductor(nombres, edad, direccion) VALUES('Jeyson Lino', 30, 'Direccion 1');
+INSERT INTO conductor(nombres, edad, direccion) VALUES('Juan Herencia', 30, 'Direccion 2');
+INSERT INTO conductor(nombres, edad, direccion) VALUES('Jose Zuñiga', 30, 'Direccion 3');
+
+-- Inserción de datos en la tabla licencia
+INSERT INTO licencia(conductor_id, tipo, fecha_expedicion, fecha_expiracion, numero) VALUES(1, 'A', '2020-01-01', '2025-01-01', 'L123456');
+INSERT INTO licencia(conductor_id, tipo, fecha_expedicion, fecha_expiracion, numero) VALUES(1, 'B', '2021-01-01', '2026-01-01', 'L123457');
+INSERT INTO licencia(conductor_id, tipo, fecha_expedicion, fecha_expiracion, numero) VALUES(2, 'A', '2019-05-01', '2024-05-01', 'L654321');
+INSERT INTO licencia(conductor_id, tipo, fecha_expedicion, fecha_expiracion, numero) VALUES(2, 'C', '2018-05-01', '2023-05-01', 'L654322');
+INSERT INTO licencia(conductor_id, tipo, fecha_expedicion, fecha_expiracion, numero) VALUES(3, 'B', '2017-07-01', '2022-07-01', 'L789012');
+INSERT INTO licencia(conductor_id, tipo, fecha_expedicion, fecha_expiracion, numero) VALUES(3, 'D', '2016-07-01', '2021-07-01', 'L789013');
+
+COMMIT;
